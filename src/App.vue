@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <v-header></v-header>
     <div class="tab">
       <ul>
         <li class="tab-item">
           <router-link to="/goods">商品</router-link>
         </li>
         <li class="tab-item">
-          <router-link to="/goods">评价</router-link>
+          <router-link to="/ratings">评价</router-link>
         </li>
         <li class="tab-item">
-          <router-link to="/goods">店铺</router-link>
+          <router-link  to="/seller">店铺</router-link>
         </li>
       </ul>
     </div>
@@ -19,27 +19,28 @@
 </template>
 
 <script>
+import header from './components/header/header';
 export default {
-  name: 'app'
-}
+  name: 'app',
+  components: {
+    'v-header': header
+  }
+};
 </script>
 
 <style lang="less" rel="stylesheet/less">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
   .tab {
     & ul {
       padding: 0;
       margin: 0;
       display: flex;
       & .tab-item {
-        list-style: none;
         flex: 1;
+        height: 40px;
+        line-height: 40px;
+        list-style: none;
+        text-align: center;
         & > a {
           display: block;
           text-decoration: none;
