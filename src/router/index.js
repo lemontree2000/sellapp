@@ -23,5 +23,6 @@ export default new Router({
       name: 'seller',
       component: seller
     }
-  ]
+  ],
+  linkActiveClass: 'active'
 });
