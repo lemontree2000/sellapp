@@ -33,6 +33,7 @@
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>  
+          <v-star :size="48" :score="seller.score"></v-star>
         </div>  
       </div>  
       <div class="detail-close">
@@ -43,12 +44,17 @@
 </template>
 
 <script>
+  import Star from '../../components/star/star';
+
   export default {
     name: 'header',
     props: {
       seller: {
         type: Object
       }
+    },
+    components: {
+      'v-star': Star
     },
     data() {
       return {
