@@ -171,7 +171,6 @@
             &.special {
               .bg-image('header/special_1');
             }
-
           }
           .text {
             line-height: 12px;
