@@ -10,6 +10,11 @@
         left:0;
     }
 };
+.border-none(){
+    &:after {
+        display: none;
+    }    
+}
 
 .bg-image(@url){
     background-image: url('../../components/@{url}@2x.png');
