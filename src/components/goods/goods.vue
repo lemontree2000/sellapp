@@ -11,7 +11,7 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods" class="food-list">
+        <li v-for="item in goods" class="food-list foot-list-hook">
           <h1 class="title"> {{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item border-1px">
@@ -41,7 +41,7 @@
 <script>
   import BScroll from 'better-scroll';
   const ERR_OK = 0;
-
+  
   export default {
     props: {
       seller: {
@@ -50,7 +50,8 @@
     },
     data() {
       return {
-        goods: []
+        goods: [],
+        listHeight: []
       };
     },
     created() {
@@ -62,6 +63,7 @@
           console.log(this.goods);
           this.$nextTick(() => {
             this._initScroll();
+            this._claculateHeight();
           });
         }
       });
@@ -76,6 +78,17 @@
           click: true,
           probeType: 3
         });
+      },
+      _claculateHeight() {
+        let foodList = this.$refs.foodsWrapper.getElementsByClassName('foot-list-hook');
+        let height = 0;
+        this.listHeight.push(height);
+        for (let i = 0; i < foodList.lenght; i++) {
+          let item = foodList[i];
+          height += item.clientHeight;
+          this.listHeight.push(height);
+        }
+        console.log(this.listHeight);
       }
     }
   };
@@ -172,10 +185,11 @@
           }
           .desc {
             margin-bottom: 8px;
+            line-height: 14px;
           }
           .extra {
             .count {
-              margin-right: 12px;
+              margin-right: 6px;
             }
           }
           .price {
