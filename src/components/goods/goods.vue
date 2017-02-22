@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="item in goods" class="menu-item">
+        <li v-for="(item,index) in goods" class="menu-item" :class="{'current': currentIndex === index}">
           <span class="text border-1px">
             <span v-show="item.type > 0"  class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -11,7 +11,7 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods" class="food-list foot-list-hook">
+        <li v-for="item in goods" class="food-list" ref="foodList">
           <h1 class="title"> {{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item border-1px">
@@ -51,7 +51,8 @@
     data() {
       return {
         goods: [],
-        listHeight: []
+        listHeight: [],
+        scrolly: 0
       };
     },
     created() {
@@ -68,6 +69,17 @@
         }
       });
     },
+    computed: {
+      currentIndex() {
+        for (let i = 0; i < this.listHeight.length; i++) {
+          let height1 = this.listHeight[i];
+          let height2 = this.listHeight[i + 1];
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+            return i;
+          }
+        }
+      }
+    },
     methods: {
       _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
@@ -78,9 +90,13 @@
           click: true,
           probeType: 3
         });
+
+        this.foodsScroll.on('scroll', (pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y));
+        });
       },
       _claculateHeight() {
-        let foodList = this.$refs.foodsWrapper.getElementsByClassName('foot-list-hook');
+        let foodList = this.$refs.foodList;
         let height = 0;
         this.listHeight.push(height);
         for (let i = 0; i < foodList.lenght; i++) {
@@ -114,6 +130,16 @@
         height: 54px;
         line-height: 14px;
         padding: 0 12px;
+        &.current {
+          background: #fff;
+          position: relative;
+          z-index: 10;
+          margin-top: -1px;
+          font-weight: 700px;
+          .text {
+            .border-none();
+          }
+        }
         .icon {
           display: inline-block;
           width: 12px;
