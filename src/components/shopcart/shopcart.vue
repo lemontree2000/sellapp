@@ -7,11 +7,13 @@
             <span class="icon-shopping_cart"></span>
           </div>
         </div>
-        <div class="price">￥89</div>
-        <div class="desc">零序</div>
+        <div class="price">89元</div>
+        <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
       </div>
       <div class="content-right">
-
+        <div class="pay">
+          ￥{{minPrice}}
+        </div>
       </div>
     </div>
   </div>
@@ -19,7 +21,16 @@
 
 <script>
   export default {
-
+    props: {
+      deliveryPrice: {
+        type: Number,
+        default: 0
+      },
+      minPrice: {
+        type: Number,
+        default: 0
+      }
+    }
   };
 </script>
 
@@ -88,6 +99,7 @@
       .content-right {
         flex: 0 0 105px;
         width: 105px;
+        .pay
       }
     }
   }
