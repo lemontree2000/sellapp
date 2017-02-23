@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item,index) in goods" class="menu-item" :class="{'current': currentIndex === index}">
+        <li v-for="(item,index) in goods" @click="selectMenu(index, $event)" class="menu-item" :class="{'current': currentIndex === index}">
           <span class="text border-1px">
             <span v-show="item.type > 0"  class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -52,7 +52,7 @@
       return {
         goods: [],
         listHeight: [],
-        scrolly: 0
+        scrollY: 0
       };
     },
     created() {
@@ -61,7 +61,6 @@
         response = response.body;
         if (response.errno === ERR_OK) {
           this.goods = response.data;
-          console.log(this.goods);
           this.$nextTick(() => {
             this._initScroll();
             this._claculateHeight();
@@ -78,9 +77,19 @@
             return i;
           }
         }
+        return 0;
       }
     },
     methods: {
+      selectMenu(index, ev) {
+        if (!ev._constructed) {
+          return;
+        }
+        let foodList = this.$refs.foodList;
+        let el = foodList[index];
+        this.foodsScroll.scrollToElement(el, 300);
+        console.log(index);
+      },
       _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
@@ -99,7 +108,7 @@
         let foodList = this.$refs.foodList;
         let height = 0;
         this.listHeight.push(height);
-        for (let i = 0; i < foodList.lenght; i++) {
+        for (let i = 0; i < foodList.length; i++) {
           let item = foodList[i];
           height += item.clientHeight;
           this.listHeight.push(height);
