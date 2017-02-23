@@ -35,11 +35,13 @@
         </li>
       </ul>
     </div>
+    <v-shopcart></v-shopcart>
   </div>    
 </template>
 
 <script>
   import BScroll from 'better-scroll';
+  import shopcart from '../shopcart/shopcart.vue';
   const ERR_OK = 0;
   
   export default {
@@ -47,6 +49,9 @@
       seller: {
         type: Object
       }
+    },
+    components: {
+      'v-shopcart': shopcart
     },
     data() {
       return {
