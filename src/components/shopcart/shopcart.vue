@@ -7,8 +7,8 @@
             <span class="icon-shopping_cart"></span>
           </div>
         </div>
-        <div class="price"></div>
-        <div class="desc"></div>
+        <div class="price">￥89</div>
+        <div class="desc">零序</div>
       </div>
       <div class="content-right">
 
@@ -42,7 +42,7 @@
         .logo-wrapper {
           display: inline-block;
           box-sizing: border-box;
-          position: absolute;
+          position: relative;
           top: -10px;
           margin: 0 12px;
           width: 56px;
@@ -67,20 +67,27 @@
         .price {
           display: inline-block;
           font-size: 16px;
-          font-weight: 700px;
+          font-weight: 700;
           box-sizing: border-box;
           padding-right: 12px;
           vertical-align: top;
           margin-top: 12px;
           line-height: 24px;
           border-right: 1px solid rgba(255,255,255,0.1);
+          color: rgba(255,255,255,0.4);
         }
         .desc {
           display: inline-block;
+          vertical-align: top;
+          margin: 12px 0 0 12px;
+          line-height: 24px;
+          font-size: 10px;
+          color: rgba(255,255,255,0.4);
         }
       }
       .content-right {
         flex: 0 0 105px;
+        width: 105px;
       }
     }
   }
