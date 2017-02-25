@@ -29,19 +29,23 @@
                   <span class="now">￥{{food.price}}</span>
                   <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
+                <div class="cart-wrapper">
+                  <v-cartcontrol :food="food"></v-cartcontrol>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    <v-shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></v-shopcart>
+    <v-shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></v-shopcart>
   </div>    
 </template>
 
 <script>
   import BScroll from 'better-scroll';
   import shopcart from '../shopcart/shopcart.vue';
+  import cartcontrol from '../cartconcontrol/cartconcontrol.vue';
   const ERR_OK = 0;
   
   export default {
@@ -51,7 +55,8 @@
       }
     },
     components: {
-      'v-shopcart': shopcart
+      'v-shopcart': shopcart,
+      'v-cartcontrol': cartcontrol
     },
     data() {
       return {
@@ -83,6 +88,17 @@
           }
         }
         return 0;
+      },
+      selectFoods() {
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
       }
     },
     methods: {
@@ -93,7 +109,6 @@
         let foodList = this.$refs.foodList;
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
-        console.log(index);
       },
       _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
@@ -118,7 +133,6 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
-        console.log(this.listHeight);
       }
     }
   };
@@ -245,7 +259,12 @@
               font-size: 10px;
               color: rgb(147, 153, 159);
             }
-          }          
+          }   
+          .cart-wrapper {
+            position: absolute;
+            right: 0;
+            bottom: 12px;
+          }       
         }
       }
     }

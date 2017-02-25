@@ -82,7 +82,7 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 50;
     height: 48px;
     width: 100%;
     .content {
