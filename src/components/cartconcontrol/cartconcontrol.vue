@@ -29,6 +29,7 @@
         } else {
           this.food.count++;
         }
+        this.$emit('add', 'event.target');
       },
       decrreaseCount(event) {
         if (!event._constructed) {

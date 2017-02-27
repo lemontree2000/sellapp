@@ -17,6 +17,13 @@
         </div>
       </div>
     </div>
+    <transition name="drop">
+      <div class="ball-container">
+        <div class="ball" v-for="ball in balls" v-show="ball.show">
+          <div class="inner"></div>
+        </div>
+      </div> 
+    </transition>
   </div>
 </template>
 
@@ -40,6 +47,27 @@
         type: Number,
         default: 0
       }
+    },
+    data() {
+      return {
+        balls: [
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          }
+        ]
+      };
     },
     computed: {
       totalPrice() {
@@ -71,6 +99,19 @@
           return 'not-enough';
         } else {
           return 'enough';
+        }
+      }
+    },
+    methods: {
+      drop(el) {
+        for (let i = 0; i < this.balls.length; i++) {
+          let ball = this.balls[i];
+          if (!ball.show) {
+            ball.show = true;
+            ball.el = el;
+            this.dropBalls.push(ball);
+            return;
+          }
         }
       }
     }
@@ -178,6 +219,24 @@
             background: #00b43c;
             color: #fff;
           }          
+        }
+      }
+    }
+    .ball-container {
+      .ball {
+        position: fixed;
+        left: 32px;
+        bottom: 22px;
+        z-index: 200;
+        &.drop-transition {
+          transition: all 0.4s;
+          .inner {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgb(0,160,220);
+            transition: all 0.4s;
+          }
         }
       }
     }
