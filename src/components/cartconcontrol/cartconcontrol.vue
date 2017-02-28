@@ -35,7 +35,7 @@
         if (!event._constructed) {
           return;
         }
-        if (this.food.count > 0) {
+        if (this.food.count) {
           this.food.count--;
         }
       }

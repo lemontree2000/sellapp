@@ -135,9 +135,10 @@
         }
       },
       addFood(target) {
-        this._drap(target);
+        this._drop(target);
       },
-      _drap(target) {
+      _drop(target) {
+        // 优化体验，异步执行下落
         this.$nextTick(() => {
           this.$refs.shopcart.drop(target);
         });
