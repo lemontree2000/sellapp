@@ -37,7 +37,7 @@
         <li class="food" v-for="food in selectFoods">
           <span class="name">{{food.name}}</span>
           <div class="price">
-            <span>￥{{fodd.price*food.count}}</span>
+            <span>￥{{food.price*food.count}}</span>
           </div> 
           <div class="cartcontrol-wrapper">
             <cartcontrol :food="food"></cartcontrol>
@@ -92,10 +92,19 @@
             show: false
           }
         ],
-        dropBalls: []
+        dropBalls: [],
+        fold: true
       };
     },
     computed: {
+      listShow() {
+        if (!this.totalCount) {
+          this.fold = true;
+          return false;
+        }
+        let show = !this.fold;
+        return show;
+      },
       totalPrice() {
         let total = 0;
         this.selectFoods.forEach((food) => {
