@@ -374,7 +374,7 @@
         line-height: 40px;
         padding: 0 18px;
         background: #f3f5f7;
-        border-bottom: 2px solid rgb(7,17,27,0.1);
+        border-bottom: 1px solid rgba(7,17,27,0.1);
         .title {
           float: left;
           font-size: 14px;
