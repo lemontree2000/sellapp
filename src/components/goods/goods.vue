@@ -41,7 +41,7 @@
     </div>
     <v-shopcart :select-foods="selectFoods" ref="shopcart" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></v-shopcart>
   </div>
-    <v-food :food="selectedFood" ref="food"></v-food>    
+    <v-food :food="selectedFood" ref="food" @add="addFood"></v-food>    
 </div>
 </template>
 
