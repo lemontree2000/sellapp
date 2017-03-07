@@ -24,6 +24,11 @@
           <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count===0">加入购物车</div>
         </transition>
       </div>
+      <v-split></v-split>
+      <div class="info" v-show="food.info">
+        <h1 class="title">商品信息</h1>
+        <p class="text">{{food.info}}</p>
+      </div>
     </div>  
   </transition>
 </template>
@@ -32,10 +37,12 @@
   import Vue from 'vue';
   import BScroll from 'better-scroll';
   import cartcontrol from '../../components/cartconcontrol/cartconcontrol';
+  import split from '../../components/split/split';
 
   export default {
     components: {
-      'cartcontrol': cartcontrol
+      'cartcontrol': cartcontrol,
+      'v-split': split
     },
     props: {
       food: {
@@ -178,6 +185,21 @@
           opacity: 0;
           z-index: -1;
         }
+      }
+    }
+    .info {
+      padding: 18px;
+      .title {
+        line-height: 14px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: rgb(7,17,27);
+      }
+      .text {
+        color: rgb(77,85,93);
+        line-height: 24px;
+        padding: 0 8px;
+        font-size: 12px;
       }
     }
   }  
