@@ -76,7 +76,7 @@
       show () {
         this.showFlag = true;
         this.selectType = ALL;
-        this.
+        
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
