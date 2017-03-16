@@ -112,7 +112,10 @@
     z-index: 30 ;
     width: 100%;
     background-color: #fff;
-    transform: translate3d(0,0,0);    
+    transform: translate3d(0,0,0);  
+    .food-content {
+      padding-bottom: 8px;
+    }  
     &.move-enter, &.move-leave-active {
       transform: translate3d(100%,0,0);
     }
