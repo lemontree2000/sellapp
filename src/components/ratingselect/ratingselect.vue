@@ -9,7 +9,6 @@
       <span class="icon-check_circle"></span>
       <span class="text">只看有内容的评价</span>
     </div>
-
   </div>
 </template>
 
@@ -49,5 +48,12 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-    
+@import "../../common/less/mixin.less";
+  .ratingselect {
+    .rating-type {
+      padding: 18px 0;
+      margin: 0 18px;
+      .border-1px(rgba(7,17,27,0.3));
+    }
+  }  
 </style>
