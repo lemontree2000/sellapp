@@ -1,11 +1,11 @@
 <template>
   <div class="ratingselect">
     <div class="rating-type border-1px">
-      <span class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count"></span>22</span>
-      <span class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">3</span></span>
-      <span class="block nagative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">4</span></span>
+      <span @click="select(2,$event)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span>
+      <span @click="select(0,$event)" class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
+      <span @click="select(1,$event)" class="block nagative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
     </div>
-    <div class="switch" :class="{'on':onlyContent}">
+    <div @click="toggleContent" class="switch" :class="{'on':onlyContent}">
       <span class="icon-check_circle"></span>
       <span class="text">只看有内容的评价</span>
     </div>
@@ -13,8 +13,8 @@
 </template>
 
 <script>
-  // const POSITIVE = 0;
-  // const NEGATIVE = 1;
+  const POSITIVE = 0;
+  const NEGATIVE = 1;
   const ALL = 2;
 
   export default {
@@ -42,6 +42,34 @@
             negative: '不满意'
           };
         }
+      }
+    },
+    computed: {
+      positives() {
+        return this.ratings.filter((rating) => {
+          return rating.rateType === POSITIVE;
+        });
+      },
+      negatives() {
+        return this.ratings.filter((rating) => {
+          return rating.rateType === NEGATIVE;
+        });
+      }
+    },
+    methods: {
+      select(type, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectType = type;
+        this.$emit('select', type);
+      },
+      toggleContent(event) {
+        if (!event._constructed) {
+          return;
+        }
+        // this.onlyContent = !this.onlyContent;
+        this.$emit('toggle');
       }
     }
   };
@@ -76,8 +104,8 @@
             background: rgb(0,160,220);
           }
         }
-        &.negative {
-          bakcground: rgb(77,85,93,0.2);
+        &.nagative {
+          background: rgba(77,85,93,0.2);
           &.active {
             background: rgb(77,85,93);
           }
