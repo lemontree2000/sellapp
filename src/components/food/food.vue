@@ -33,7 +33,12 @@
         <v-split></v-split>
         <div class="rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect :ratings="food.ratings" :select-type="selectType" :only-content="onlyContent" :desc="desc"></ratingselect>
+          <ratingselect :ratings="food.ratings" 
+                        :selectType="selectType" 
+                        :onlyContent="onlyContent" 
+                        @select="selectRating"
+                        :desc="desc">
+          </ratingselect>
         </div>
       </div>  
     </div>
@@ -88,6 +93,12 @@
       },
       hide() {
         this.showFlag = false;
+      },
+      selectRating(type) {
+        this.selectType = type;
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
       },
       addFirst(event) {
         if (!event._constructed) {
