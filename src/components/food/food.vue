@@ -39,6 +39,21 @@
                         @select="selectRating"
                         :desc="desc">
           </ratingselect>
+          <div class="rating-wrapper">
+            <ul v-show="food.ratings && food.ratings.length">
+              <li v-for="ratings in food.ratings" class="rating-item">
+                <div class="user">
+                  <span class="name">{{ ratings.username }}</span>
+                  <img :src="rating.avatar" width="12" height="12" class="avatar" alt="...">
+                </div>
+                <div class="time">{{ rating.rateTime }}</div>
+                <p class="text">
+                  <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down': rating.tateType===1}">{{rating.text}}</span>
+                </p>
+              </li>
+            </ul>
+            <div class="no-rating" v-show="!food.ratings || !food.ratings.length"></div>
+          </div>
         </div>
       </div>  
     </div>
