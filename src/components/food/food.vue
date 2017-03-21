@@ -41,7 +41,7 @@
           </ratingselect>
           <div class="rating-wrapper">
             <ul v-show="food.ratings && food.ratings.length">
-              <li v-for="ratings in food.ratings" class="rating-item border-1px">
+              <li v-show="needShow(rating.rateType,rating.text)" v-for="ratings in food.ratings" class="rating-item border-1px">
                 <div class="user">
                   <span class="name">{{ ratings.username }}</span>
                   <img :src="ratings.avatar" width="12" height="12" class="avatar" alt="...">
