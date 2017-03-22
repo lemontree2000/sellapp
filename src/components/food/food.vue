@@ -66,8 +66,6 @@
   import cartcontrol from '../../components/cartconcontrol/cartconcontrol';
   import split from '../../components/split/split';
   import ratingselect from '../../components/ratingselect/ratingselect';
-  // const POSITIVE = 0;
-  // const NEGATIVE = 1;
   const ALL = 2;
   
   export default {
@@ -83,7 +81,7 @@
     },
     data () {
       return {
-        showFlag: false,
+        showFlag: true,
         selectType: ALL,
         onlyContent: true,
         desc: {
@@ -97,7 +95,7 @@
       show () {
         this.showFlag = true;
         this.selectType = ALL;
-        this.onlyContent = true;
+        this.onlyContent = false;
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
@@ -105,6 +103,16 @@
             });
           }
         });
+      },
+      needShow (type, text) {
+        if (this.onlyContent && !text) {
+          return false;
+        }
+        if (this.selectType === ALL) {
+          return false;
+        } else {
+          return type === this.selectType;
+        }
       },
       hide() {
         this.showFlag = false;
