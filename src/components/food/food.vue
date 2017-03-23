@@ -12,7 +12,7 @@
           <h1 class="title">{{food.name}}</h1>
           <div class="detail">
             <span class="sell-count">月售{{food.sellCount}}份</span>
-            <span class="rating">好评率{{food.rating}}份</span>
+            <span class="rating">好评率{{food.rating}}%</span>
           </div>
           <div class="price">
             <span class="now">￥{{food.price}}</span>
@@ -37,6 +37,7 @@
                         :selectType="selectType" 
                         :onlyContent="onlyContent" 
                         @select="selectRating"
+                        @toggle="toggleContent"
                         :desc="desc">
           </ratingselect>
           <div class="rating-wrapper">
@@ -52,7 +53,7 @@
                 </p>
               </li>
             </ul>
-            <div class="no-rating" v-show="!food.ratings || !food.ratings.length"></div>
+            <div class="no-rating" v-show="!food.ratings || !food.ratings.length">暂无评价</div>
           </div>
         </div>
       </div>  
@@ -81,7 +82,7 @@
     },
     data () {
       return {
-        showFlag: true,
+        showFlag: false,
         selectType: ALL,
         onlyContent: true,
         desc: {
@@ -92,19 +93,21 @@
       };
     },
     methods: {
-      show () {
+      show() {
         this.showFlag = true;
         this.selectType = ALL;
-        this.onlyContent = false;
+        this.onlyContent = true;
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
               click: true
             });
+          } else {
+            this.scroll.refresh();
           }
         });
       },
-      needShow (type, text) {
+      needShow(type, text) {
         if (this.onlyContent && !text) {
           return false;
         }
