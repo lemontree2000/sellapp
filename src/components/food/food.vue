@@ -47,7 +47,7 @@
                   <span class="name">{{ ratings.username }}</span>
                   <img :src="ratings.avatar" width="12" height="12" class="avatar" alt="...">
                 </div>
-                <div class="time">{{ ratings.rateTime }}</div>
+                <div class="time">{{ ratings.rateTime | formatDate }}</div>
                 <p class="text">
                   <span :class="{'icon-thumb_up':ratings.rateType===0,'icon-thumb_down': ratings.tateType===1}"></span>{{ratings.text}}
                 </p>
@@ -67,6 +67,7 @@
   import cartcontrol from '../../components/cartconcontrol/cartconcontrol';
   import split from '../../components/split/split';
   import ratingselect from '../../components/ratingselect/ratingselect';
+  import {formaDate} from '../../common/js/date';
   const ALL = 2;
   
   export default {
@@ -91,6 +92,12 @@
           negative: '吐槽'
         }
       };
+    },
+    filters: {
+      formatDate(time) {
+        let date = new Date();
+        return formaDate(date, 'yyyy-MM-dd hh:mm');
+      }
     },
     methods: {
       show() {
@@ -317,6 +324,11 @@
               color: rgb(147,153,159);
             }
           } 
+        }
+        .no-rating {
+          padding: 16px 0;
+          font-size: 12px;
+          color: rgb(147,153,159);
         }
       }
     }
