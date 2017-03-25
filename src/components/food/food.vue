@@ -3,7 +3,7 @@
     <div v-show="showFlag" class="food" ref="food">
       <div class="food-content">
         <div class="image-header">
-          <img :src="food.image" alt="..">
+          <img :src="food.image">
           <div class="back" @click="hide">
             <i class="icon-arrow_lift"></i>
           </div>
@@ -19,10 +19,12 @@
             <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}%</span>
           </div>
           <div class="cartcontrol-wrapper">
-            <cartcontrol :food="food" @add="addFood"></cartcontrol>
+            <cartcontrol @add="addFood" :food="food" ></cartcontrol>
           </div>
           <transition name="fade">
-            <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count===0">加入购物车</div>
+            <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count===0">
+              加入购物车
+              </div>
           </transition>
         </div>
         <v-split v-show="food.info"></v-split>
@@ -42,14 +44,14 @@
           </ratingselect>
           <div class="rating-wrapper">
             <ul v-show="food.ratings && food.ratings.length">
-              <li v-show="needShow(rating.rateType,rating.text)" v-for="ratings in food.ratings" class="rating-item border-1px">
+              <li  v-for="ratings in food.ratings" v-show="needShow(ratings.rateType,ratings.text)" class="rating-item border-1px">
                 <div class="user">
                   <span class="name">{{ ratings.username }}</span>
                   <img :src="ratings.avatar" width="12" height="12" class="avatar" alt="...">
                 </div>
                 <div class="time">{{ ratings.rateTime | formatDate }}</div>
                 <p class="text">
-                  <span :class="{'icon-thumb_up':ratings.rateType===0,'icon-thumb_down': ratings.tateType===1}"></span>{{ratings.text}}
+                  <span :class="{'icon-thumb_up':ratings.rateType===0,'icon-thumb_down':ratings.tateType===1}"></span>{{ratings.text}}
                 </p>
               </li>
             </ul>
@@ -67,7 +69,7 @@
   import cartcontrol from '../../components/cartconcontrol/cartconcontrol';
   import split from '../../components/split/split';
   import ratingselect from '../../components/ratingselect/ratingselect';
-  import {formaDate} from '../../common/js/date';
+  import {formatDate} from '../../common/js/date';
   const ALL = 2;
   
   export default {
@@ -95,8 +97,8 @@
     },
     filters: {
       formatDate(time) {
-        let date = new Date();
-        return formaDate(date, 'yyyy-MM-dd hh:mm');
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
       }
     },
     methods: {
@@ -119,7 +121,7 @@
           return false;
         }
         if (this.selectType === ALL) {
-          return false;
+          return true;
         } else {
           return type === this.selectType;
         }
@@ -129,6 +131,12 @@
       },
       selectRating(type) {
         this.selectType = type;
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
+      },
+      toggleContent() {
+        this.onlyContent = !this.onlyContent;
         this.$nextTick(() => {
           this.scroll.refresh();
         });

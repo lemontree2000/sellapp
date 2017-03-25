@@ -35,7 +35,7 @@
       },
       desc: {
         type: Object,
-        default () {
+        default() {
           return {
             all: '全部',
             positive: '满意',
@@ -76,7 +76,7 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-@import "../../common/less/mixin.less";
+  @import "../../common/less/mixin.less";
   .ratingselect {
     .rating-type {
       padding: 18px 0;
