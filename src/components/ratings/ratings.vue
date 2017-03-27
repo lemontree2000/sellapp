@@ -24,20 +24,35 @@
           </div>            
         </div>
       </div>
+      <split></split>
+      <ratingselect></ratingselect>
     </div>
   </div>
 </template>
 
 <script>
   import star from '../../components/star/star';
+  import split from '../../components/split/split';
+  import ratingselect from '../../components/ratingselect/ratingselect';
+
+  const ALL = 2;
   export default {
     props: {
       seller: {
         type: Object
       }
     },
+    data() {
+      return {
+        showFlag: false,
+        selectType: ALL,
+        onlyContent: true
+      };
+    },
     components: {
-      'star': star
+      'star': star,
+      'split': split,
+      'ratingselect': ratingselect
     }
   };
 </script>
