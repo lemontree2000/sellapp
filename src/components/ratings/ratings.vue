@@ -56,10 +56,14 @@
       padding: 18px 0;
       .overview-left {
         flex: 0 0 137px;
-        padding: 6px 0;        
         width: 137px;
+        padding: 6px 0;        
         border-right: 1px solid rgba(7,17,27,0.1);
         text-align: center;
+        @media only screen and (max-width: 320px) {
+          flex: 0 0 120px;
+          width: 120px;
+        }
         .score {
           line-height: 28px;
           font-size: 24px;
@@ -79,8 +83,11 @@
       }
       .overview-right {
         flex: 1;
-        padding-left: 24px;
+        padding: 6px 0 6px 24px;
         line-height: 18px;
+        @media only screen and (max-width: 320px) {
+        padding-left: 6px;
+        }
         .score-wrapper {
           margin-bottom: 8px;
           display: inline-block;
