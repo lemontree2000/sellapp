@@ -1,5 +1,5 @@
 <template>
-  <div class="ratings">
+  <div class="ratings" ref="ratings">
     <div class="ratings-content">
       <div class="overview" >
         <div class="overview-left">
@@ -34,7 +34,7 @@
         <ul>
           <li v-for="rating in ratings" class="rating-item">
             <div class="avatar">
-              <img :src="rating.avatar" alt="">
+              <img :src="rating.avatar" width="28" height="28" alt="">
             </div>
             <div class="onlyContent">
               <h1 class="name">{{rating.username}}</h1>
@@ -62,6 +62,8 @@
   import star from '../../components/star/star';
   import split from '../../components/split/split';
   import ratingselect from '../../components/ratingselect/ratingselect';
+  import {formatDate} from '../../common/js/date';
+  import BScroll from 'better-scroll';
 
   const ALL = 2;
   const ERR_OK = 0;
@@ -87,14 +89,25 @@
       this.$http.get('/api/ratings').then(function(response) {
         if (response.body.errno === ERR_OK) {
           this.ratings = response.body.data;
+          this.$nextTick(() => {
+            this.scroll = new BScroll(this.$refs.ratings, {
+              click: true
+            });
+          });
         }
       });
+    },
+    filters: {
+      formatDate(time) {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
+      }
     }
   };
 </script>
 
 <style lang="less" rel="stylesheet/less">
-
+  @import "../../common/less/mixin.less";
   .ratings {
     position: absolute;
     top: 174px;
@@ -173,6 +186,14 @@
             margin-left: 12px;
           }
         }
+      }
+    }
+    .rating-wrapper {
+      padding: 0 18px;
+      .rating-item {
+        display: flex;
+        padding: 18px 0;
+        .border-1px(rgba(7,17,27,0.1))
       }
     }
   }
