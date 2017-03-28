@@ -195,6 +195,40 @@
         padding: 18px 0;
         .border-1px(rgba(7,17,27,0.1))
       }
+      .avatar {
+        flex: 0 0 28px;
+        width: 28px;
+        margin-right: 12px;
+        img {
+          border-radius: 50%;
+        }
+      }
+      .content {
+        position: relative;
+        flex: 1;
+        .name {
+          line-height: 12px;
+          font-size: 10px;
+          color: rgb(7,17,27);
+          margin-bottom: 4px;
+        }
+        .star-wrapper {
+          margin-bottom: 6px;
+          font-size: 0;
+          .star {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 6px;
+          }
+          .delivery {
+            display: inline-block;
+            vertical-align: top; 
+            line-height: 12px;
+            font-size: 10px;
+            color: rgb(147,153,159);      
+          } 
+        }
+      }
     }
   }
 </style>
