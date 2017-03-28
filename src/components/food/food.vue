@@ -83,7 +83,7 @@
         type: Object
       }
     },
-    data () {
+    data() {
       return {
         showFlag: false,
         selectType: ALL,
