@@ -191,10 +191,18 @@
     .rating-wrapper {
       padding: 0 18px;
       .rating-item {
-        display: flex;
+        display: flex;   
+
+
+
+
+
+
         padding: 18px 0;
         .border-1px(rgba(7,17,27,0.1))
       }
+
+
       .avatar {
         flex: 0 0 28px;
         width: 28px;
@@ -224,8 +232,7 @@
             display: inline-block;
             vertical-align: top; 
             line-height: 12px;
-            font-size: 10px;
-            color: rgb(147,153,159);      
+            font-size: 10px;   
           } 
         }
       }
