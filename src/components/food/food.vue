@@ -61,6 +61,11 @@
       </div>  
     </div>
   </transition>
+
+
+
+
+  
 </template>
 
 <script>
@@ -71,7 +76,9 @@
   import ratingselect from '../../components/ratingselect/ratingselect';
   import {formatDate} from '../../common/js/date';
   const ALL = 2;
-  
+
+  // default
+
   export default {
     components: {
       'cartcontrol': cartcontrol,
