@@ -16,4 +16,4 @@ new Vue({
   components: { App }
 });
 
-router.push('goods');
+// router.push('goods');

@@ -46,9 +46,9 @@
               <div class="recommend" v-show="rating.recommend.length && rating.recommend">
                 <span class="icon-thumb_up"></span>
                 <span v-for="item in rating.recommend" class="item">{{item}}</span>
-                <div class="time">
-                  {{rating.rateTime | formatDate}}
-                </div>
+              </div>
+              <div class="time">
+                {{rating.rateTime | formatDate}}
               </div>
             </div>
           </li>
@@ -150,7 +150,7 @@
         padding: 6px 0 6px 24px;
         line-height: 18px;
         @media only screen and (max-width: 320px) {
-        padding-left: 6px;
+          padding-left: 6px;
         }
         .score-wrapper {
           margin-bottom: 8px;
@@ -235,6 +235,7 @@
         }
         .recommend {
           line-height: 16px;
+          font-size: 0;
           .icon-thumb_up, .item {
             display: inline-block;
             margin: 0 8px 4px 0;
@@ -250,6 +251,14 @@
             color: rgb(147,153,159);
             background: #fff;
           }
+        }
+        .time {
+          position: absolute;
+          top: 0;
+          right: 0;
+          line-height: 12px;
+          font-size: 12px;
+          color: rgb(147,153,159);
         }
       }
     }
