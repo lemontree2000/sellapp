@@ -45,7 +45,7 @@
               <p class="text">{{rating.text}}</p>
               <div class="recommend" v-show="rating.recommend.length && rating.recommend">
                 <span class="icon-thumb_up"></span>
-                <span v-for="item in rating.recommend">{{item}}</span>
+                <span v-for="item in rating.recommend" class="item">{{item}}</span>
                 <div class="time">
                   {{rating.rateTime | formatDate}}
                 </div>
@@ -192,17 +192,9 @@
       padding: 0 18px;
       .rating-item {
         display: flex;   
-
-
-
-
-
-
         padding: 18px 0;
         .border-1px(rgba(7,17,27,0.1))
       }
-
-
       .avatar {
         flex: 0 0 28px;
         width: 28px;
@@ -211,7 +203,7 @@
           border-radius: 50%;
         }
       }
-      .content {
+      .onlyContent {
         position: relative;
         flex: 1;
         .name {
@@ -234,6 +226,30 @@
             line-height: 12px;
             font-size: 10px;   
           } 
+        }
+        .text {
+          margin-bottom: 8px;
+          line-height: 18px;
+          color: rgb(7,17,27);
+          font-size: 12px;
+        }
+        .recommend {
+          line-height: 16px;
+          .icon-thumb_up, .item {
+            display: inline-block;
+            margin: 0 8px 4px 0;
+            font-size: 9px;
+          }
+          .icon-thumb_up {
+            color: rgb(0,160,220);
+          }
+          .item {
+            padding: 0 6px;
+            border: 1px solid rgba(7,17,27,0.1);
+            border-radius: 1px;
+            color: rgb(147,153,159);
+            background: #fff;
+          }
         }
       }
     }
