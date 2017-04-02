@@ -31,12 +31,28 @@
             </li>
           </ul>
         </div>
+        <split></split>
+        <div class="bulletin">
+          <h1 class="title">公告与活动</h1>
+          <div class="content-wrapper">
+            <p class="content">
+              {{seller.bulletin}}
+            </p>
+          </div>
+          <ul v-if="seller.supports" class="supports">
+            <li class="support-item border-1px" v-for="(item,index) in seller.supports">
+              <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+              <span class="text">{{seller.supports[index].description}}</span>
+            </li>
+          </ul>        
+        </div>
       </div>
     </div>
 </template>
 
 <script>
   import star from 'components/star/star';
+  import split from 'components/split/split';
   
   export default {
     props: {
@@ -45,7 +61,17 @@
       }
     },
     components: {
-      'v-star': star
+      'v-star': star,
+      'split': split
+    },
+    created() {
+      this.classMap = [
+        'decrease',
+        'descount',
+        'special',
+        'invoice',
+        'guarantee'
+      ];
     }
   };
 </script>
@@ -61,7 +87,7 @@
     overflow: hidden;
     .seller-container {
       .overview {
-        padding: 18px;
+        padding: 18px 18px 0 18px;
         .title {
           font-size: 16px;
           color: rgb(7,17,27);
@@ -71,7 +97,6 @@
         .desc {
           font-size: 0;
           padding-bottom: 18px;
-          line-height: 18px;
           .border-1px(rgba(7,17,27,0.1));
           .star {
             display: inline-block;
@@ -80,8 +105,8 @@
           }  
           .text {
             display: inline-block;
+            line-height: 18px;            
             font-size: 10px;
-            line-height: 16px;
             color: rgb(77,85,93);
             margin-right: 12px;
             vertical-align: top;
@@ -114,6 +139,53 @@
             }
           }
         }      
+      }
+      .bulletin {
+        padding: 18px 18px 0 18px;        
+        .title {
+          font-size: 16px;
+          color: rgb(7,17,27);
+          line-height: 16px;
+          margin-bottom: 8px; 
+        }
+        .content-wrapper {
+          padding: 0 12px 16px 12px;
+          .border-1px(rgba(7,17,27,0.1));
+          .content {
+            line-height: 24px;
+            color: rgb(240,20,20);
+            font-size: 12px;
+          }
+        }
+        .supports {
+          .icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+            background-size: 12px;
+            &.decrease {
+              .bg-image('header/decrease_1');
+            }
+            &.descount {
+              .bg-image('header/discount_1');
+            }
+            &.guarantee {
+              .bg-image('header/guarantee_1');
+            }
+            &.invoice {
+              .bg-image('header/invoice_1');
+            }
+            &.special {
+              .bg-image('header/special_1');
+            }
+          }
+          .text {
+            line-height: 12px;
+            font-size: 10px;
+            vertical-align: top;
+          }
+        }
       }
     }
   }
