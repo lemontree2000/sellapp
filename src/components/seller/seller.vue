@@ -1,5 +1,5 @@
 <template>
-    <div class="seller">
+    <div class="seller" ref="seller">
       <div class="seller-container">
         <div class="overview">
           <h1 class="title">
@@ -53,6 +53,7 @@
 <script>
   import star from 'components/star/star';
   import split from 'components/split/split';
+  import BScroll from 'better-scroll';
   
   export default {
     props: {
@@ -72,6 +73,20 @@
         'invoice',
         'guarantee'
       ];
+    },
+    watch: {
+      'seller'() {
+
+      }
+    },
+    ready() {
+      console.log(1);
+      this.scroll = new BScroll(this.$refs.seller, {
+        click: true
+      });
+    },
+    methods: {
+      
     }
   };
 </script>
@@ -158,31 +173,38 @@
           }
         }
         .supports {
+          .support-item {
+            padding: 16px;
+            .border-1px(rgba(7,17,27,0.1));
+            font-size: 0;
+          }          
           .icon {
             display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-right: 4px;
-            background-size: 12px;
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            vertical-align: top;
+            background-repeat: no-repeat;
+            background-size: 16px;
             &.decrease {
-              .bg-image('header/decrease_1');
+              .bg-image('seller/decrease_4');
             }
             &.descount {
-              .bg-image('header/discount_1');
+              .bg-image('seller/discount_4');
             }
             &.guarantee {
-              .bg-image('header/guarantee_1');
+              .bg-image('seller/guarantee_4');
             }
             &.invoice {
-              .bg-image('header/invoice_1');
+              .bg-image('seller/invoice_4');
             }
             &.special {
-              .bg-image('header/special_1');
+              .bg-image('seller/special_4');
             }
           }
           .text {
-            line-height: 12px;
-            font-size: 10px;
+            line-height: 16px;
+            font-size: 12px;
             vertical-align: top;
           }
         }
