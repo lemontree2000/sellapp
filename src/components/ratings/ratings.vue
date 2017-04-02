@@ -28,11 +28,13 @@
       <ratingselect :ratings="ratings" 
                     :selectType="selectType" 
                     :onlyContent="onlyContent" 
+                     @toggle="toggleContent"
+                     @select="selectRating"
                    >
       </ratingselect>
       <div class="rating-wrapper">
         <ul>
-          <li v-for="rating in ratings" class="rating-item">
+          <li v-for="rating in ratings" v-show="needShow(rating.rateType,rating.text)" class="rating-item">
             <div class="avatar">
               <img :src="rating.avatar" width="28" height="28" alt="">
             </div>
@@ -101,6 +103,30 @@
       formatDate(time) {
         let date = new Date(time);
         return formatDate(date, 'yyyy-MM-dd hh:mm');
+      }
+    },
+    methods: {
+      selectRating(type) {
+        this.selectType = type;
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
+      },
+      toggleContent() {
+        this.onlyContent = !this.onlyContent;
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
+      },
+      needShow(type, text) {
+        if (this.onlyContent && !text) {
+          return false;
+        }
+        if (this.selectType === ALL) {
+          return true;
+        } else {
+          return type === this.selectType;
+        }
       }
     }
   };
