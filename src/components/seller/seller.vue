@@ -44,7 +44,8 @@
               <span class="icon" :class="classMap[seller.supports[index].type]"></span>
               <span class="text">{{seller.supports[index].description}}</span>
             </li>
-          </ul>        
+          </ul>
+          <split></split>      
         </div>
       </div>
     </div>
@@ -76,17 +77,27 @@
     },
     watch: {
       'seller'() {
-
+        this.$nextTick(() => {
+          this._initScroll();
+        });
       }
     },
-    ready() {
-      console.log(1);
-      this.scroll = new BScroll(this.$refs.seller, {
-        click: true
-      });
-    },
     methods: {
-      
+      _initScroll() {
+        console.log(1);
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.seller, {
+            click: true
+          });
+        } else {
+          this.scroll.refresh();
+        }
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this._initScroll();
+      });
     }
   };
 </script>
@@ -177,6 +188,9 @@
             padding: 16px;
             .border-1px(rgba(7,17,27,0.1));
             font-size: 0;
+            &:last-child {
+              border: none;
+            }
           }          
           .icon {
             display: inline-block;
