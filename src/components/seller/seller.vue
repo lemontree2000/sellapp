@@ -30,6 +30,10 @@
               </div>
             </li>
           </ul>
+          <div class="favorite" @click="toggleFavorite">
+            <span class="icon-favorite" :class="{'active': favorite}"></span>
+            <span class="text">{{favoriteText}}</span>
+          </div>
         </div>
         <split></split>
         <div class="bulletin">
@@ -87,6 +91,16 @@
       'v-star': star,
       'split': split
     },
+    data() {
+      return {
+        favorite: false
+      };
+    },
+    computed: {
+      favoriteText() {
+        return this.favorite ? '已收藏' : '收藏';
+      }
+    },
     created() {
       this.classMap = [
         'decrease',
@@ -134,6 +148,12 @@
             }
           });
         }
+      },
+      toggleFavorite(event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.favorite = !this.favorite;
       }
     },
     mounted() {
@@ -156,6 +176,7 @@
     overflow: hidden;
     .seller-container {
       .overview {
+        position: relative;
         padding: 18px 18px 0 18px;
         .title {
           font-size: 16px;
@@ -207,7 +228,29 @@
               }
             }
           }
-        }      
+        }
+        .favorite {
+          position: absolute;
+          width: 36px;
+          right: 18px;
+          top: 18px;
+          text-align: center;
+          .icon-favorite {
+            margin-bottom: 4px;
+            color: #d4d6d9;
+            display: block;
+            line-height: 24px;
+            font-size: 24px;
+            &.active {
+              color: rgb(240,20,20)
+            }
+          }
+          .text {
+            line-height: 10px;
+            font-size: 10px;
+            color: rgb(77,85,93);
+          }
+        }  
       }
       .bulletin {
         padding: 18px 18px 0 18px;        
