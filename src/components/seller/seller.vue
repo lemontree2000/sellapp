@@ -59,6 +59,15 @@
             </ul>
           </div>
         </div> 
+        <split></split>
+        <div class="info">
+          <h1 class="title border-1px">商家信息</h1>
+          <ul>
+            <li class="info-item" v-for="info in seller.infos">
+              {{info}}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 </template>
@@ -222,7 +231,7 @@
             padding: 16px;
             .border-1px(rgba(7,17,27,0.1));
             font-size: 0;
-            &:last-child {
+            &:last-child:after {
               border: none;
             }
           }          
@@ -280,6 +289,25 @@
                 margin: 0;
               }
             }
+          }
+        }
+      }
+      .info {
+        color: rgb(7,17,27);
+        padding: 18px 18px 0 18px;
+        .title {
+          font-size: 16px;
+          line-height: 16px;
+          padding-bottom: 12px; 
+          .border-1px(rgba(7,17,27,0.1));
+        }
+        .info-item {
+          padding: 16px 12px;
+          line-height: 16px;
+          .border-1px(rgba(7,17,27,0.1));
+          font-size: 12px;
+          &:last-child:after {
+            border: none;
           }
         }
       }
