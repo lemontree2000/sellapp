@@ -45,8 +45,20 @@
               <span class="text">{{seller.supports[index].description}}</span>
             </li>
           </ul>
-          <split></split>      
         </div>
+        <split></split>
+        <div class="pics">
+          <h1 class="title">
+            商家实景
+          </h1>
+          <div class="pic-wrapper" ref="picWrapper">
+            <ul class="pic-list" ref="picList">
+              <li class="pic-item" v-for="pic in seller.pics">
+                <img :src="pic" width="120" height="90" alt="">
+              </li>
+            </ul>
+          </div>
+        </div> 
       </div>
     </div>
 </template>
@@ -79,6 +91,7 @@
       'seller'() {
         this.$nextTick(() => {
           this._initScroll();
+          this._initPic();
         });
       }
     },
@@ -92,10 +105,31 @@
         } else {
           this.scroll.refresh();
         }
+      },
+      _initPic() {
+        if (this.seller.pics) {
+          let picWidth = 120;
+          let margin = 6;
+          let width = (picWidth + margin) * this.seller.pics.length - margin;
+          console.log(this.$refs.picList);
+          this.$refs.picList.style.width = width + 'px';
+          this.$nextTick(() => {
+            if (!this.picScroll) {
+              this.picScroll = new BScroll(this.$refs.picWrapper, {
+                click: true,
+                scrollX: true,
+                eventPassthrough: 'vertical'
+              });
+            } else {
+              this.picScroll.refresh();
+            }
+          });
+        }
       }
     },
     mounted() {
       this.$nextTick(() => {
+        this._initPic();
         this._initScroll();
       });
     }
@@ -220,6 +254,32 @@
             line-height: 16px;
             font-size: 12px;
             vertical-align: top;
+          }
+        }
+      }
+      .pics {
+        padding: 18px;
+        .title {
+          font-size: 16px;
+          color: rgb(7,17,27);
+          line-height: 16px;
+          margin-bottom: 8px;
+        }
+        .pic-wrapper {
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          .pic-list {
+            font-size: 0;
+            .pic-item {
+              display: inline-block;
+              margin-right: 6px;
+              width: 120px;
+              height: 90px;
+              &:last-child {
+                margin: 0;
+              }
+            }
           }
         }
       }
